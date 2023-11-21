@@ -1,0 +1,52 @@
+﻿@model List<PatientManager.Core.Application.ViewModels.LaboratoryTestResults.LaboratoryTestResultViewModel>;
+@using WebApp.PatientManager.Constants;
+@{
+    ViewData["Title"] = "Consultation results";
+    int id = 0;
+    foreach(var item in Model)
+    {
+        id = item.Appointment.Id;
+        break;
+    }
+
+}
+
+<h1>Consultar resultados</h1>
+
+<div class="container-fluid">
+
+    <div class="row mb-4">
+        <div class="offset-9">
+            <a asp-controller="Appointment" asp-action="CompleteAppointment" asp-route-id="@id" class="btn btn-success">Completar cita</a>
+            <a asp-controller="Appointment" asp-action="Index" class="btn btn-warning">Cerrar resultados</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="table align-middle mb-0 bg-white mt-3">
+            <thead class="bg-light">
+                <tr>
+                    <th>Nombre prueba</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    var textDecoration = item.State == LaboratoryTestState.Pending ? "badge-secondary" : "badge-success";
+                    var textTranslation = item.State == LaboratoryTestState.Pending ? "Pendiente" : "Completada";
+
+                    <tr>
+                        <td>
+                            <p class="fw-bold mb-1">@item.LaboratoryTest.Name</p>
+                        </td>
+                        <td>
+                            <p class="badge @(textDecoration) fw-normal mb-1">@textTranslation</p>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

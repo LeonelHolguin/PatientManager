@@ -1,0 +1,68 @@
+﻿@model PatientManager.Core.Application.ViewModels.Medics.SaveMedicViewModel;
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+    ViewData["Title"] = "Save";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-opacity-50 bg-success text-black">
+                    <h4>@(editMode ? $"Editando el medico: {Model.Name}" : "Creando nuevo medico")</h4>
+                </div>
+                <div class="card-body">
+
+                    <form method="post" enctype="multipart/form-data" asp-controller="Medic" asp-action="@(editMode ? "Edit" : "Create")">
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Nombre</label>
+                            <input asp-for="Name" class="form-control" placeholder="Jose..." />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="LastName" class="form-label">Apellido</label>
+                            <input asp-for="LastName" class="form-control" placeholder="Martinez" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">Correo</label>
+                            <input asp-for="Email" type="email" class="form-control" placeholder="Example@example.com" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Phone" class="form-label">Telefono</label>
+                            <input asp-for="Phone" class="form-control" placeholder="809-999-9999" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="IdentityCard" class="form-label">Cédula</label>
+                            <input asp-for="IdentityCard" maxlength="13" class="form-control" placeholder="200-3241253-5" />
+                            <span asp-validation-for="IdentityCard" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="File" class="form-label">Seleccione una foto</label>
+                            @if (editMode)
+                            {
+                                <input asp-for="File" class="form-control" />
+                            }
+                            else
+                            {
+                                <input asp-for="File" required class="form-control" />
+                            }
+
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="Photo" value="defaultValue" />
+                        <input type="hidden" asp-for="Created" />
+                        <input type="hidden" asp-for="CreatedBy" />
+
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                        <a class="btn btn-warning" asp-controller="Medic" asp-action="Index">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

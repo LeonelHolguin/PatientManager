@@ -1,0 +1,70 @@
+﻿@model PatientManager.Core.Application.ViewModels.Users.SaveUserViewModel;
+@using WebApp.PatientManager.Constants;
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+    ViewData["Title"] = "Save";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-opacity-50 bg-success text-black">
+                    <h4>@(editMode ? $"Editando el usuario: {Model.Name}" : "Creando nuevo usuario")</h4>
+                </div>
+                <div class="card-body">
+
+                    <form method="post" asp-controller="User" asp-action="@(editMode ? "Edit" : "Create")">
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Nombre</label>
+                            <input asp-for="Name" class="form-control" placeholder="Jose..." />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="LastName" class="form-label">Apellido</label>
+                            <input asp-for="LastName" class="form-control" placeholder="Martinez" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">Correo</label>
+                            <input asp-for="Email" type="email" class="form-control" placeholder="Example@example.com" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="UserName" class="form-label">Nombre de usuario</label>
+                            <input asp-for="UserName" class="form-control" placeholder="Jose234..." />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label">Contraseña</label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="ConfirmPassword" class="form-label">Confirmar contraseña</label>
+                            <input asp-for="ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Role" class="form-label">Rol de usuario</label>
+                            <select asp-for="Role " class="form-select">
+                                <option value="@(string.Empty)">Seleccione una...</option>
+                                <option value="@(Roles.Administrator)">Administrador</option>
+                                <option value="@(Roles.Assistant)">Asistente</option>
+                            </select>
+                            <span asp-validation-for="Role" class="text-danger"></span>
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="Created" />
+                        <input type="hidden" asp-for="CreatedBy" />
+
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                        <a class="btn btn-warning" asp-controller="User" asp-action="Index">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

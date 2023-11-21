@@ -1,0 +1,40 @@
+﻿@model List<PatientManager.Core.Application.ViewModels.LaboratoryTestResults.LaboratoryTestResultViewModel>;
+@{
+    ViewData["Title"] = "View results";
+
+}
+
+<h1>Resultados</h1>
+
+<div class="container-fluid">
+
+    <div class="row mb-4">
+        <div class="col-3 offset-9">
+            <a asp-controller="Appointment" asp-action="Index" class="btn btn-info">Volver</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="table align-middle mb-0 bg-white mt-3">
+            <thead class="bg-light">
+                <tr>
+                    <th>Nombre prueba</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <p class="fw-bold mb-1">@item.LaboratoryTest.Name</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">@item.Description</p>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

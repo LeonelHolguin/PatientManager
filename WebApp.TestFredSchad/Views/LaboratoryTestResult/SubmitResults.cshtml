@@ -1,0 +1,39 @@
+﻿@model PatientManager.Core.Application.ViewModels.LaboratoryTestResults.SaveLaboratoryTestResultViewModel;
+@using WebApp.PatientManager.Constants;
+@{
+    ViewData["Title"] = "Save";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-opacity-50 bg-success text-black">
+                    <h4>Repotar resultado</h4>
+                </div>
+                <div class="card-body">
+
+                    <form method="post" asp-controller="LaboratoryTestResult" asp-action="SubmitResults">
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">Resultados</label>
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="State" value="@LaboratoryTestState.Completed" />
+                        <input type="hidden" asp-for="PatientId" />
+                        <input type="hidden" asp-for="LaboratoryTestId" />
+                        <input type="hidden" asp-for="AppointmentId" />
+                        <input type="hidden" asp-for="Created" />
+                        <input type="hidden" asp-for="CreatedBy" />
+
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                        <a class="btn btn-warning" asp-controller="LaboratoryTestResult" asp-action="Index">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

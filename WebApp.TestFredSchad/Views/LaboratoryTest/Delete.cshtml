@@ -1,0 +1,24 @@
+﻿@model PatientManager.Core.Application.ViewModels.LaboratoryTest.SaveLaboratoryTestViewModel;
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header bg-danger text-light">
+                <h4>¿Está seguro que desea eliminar esta prueba (@Model.Name)?</h4>
+            </div>
+            <div class="card-body">
+
+                <form method="post" asp-controller="LaboratoryTest" asp-action="DeletePost">
+
+                    <input type="hidden" asp-for="Id" />
+
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <a asp-controller="LaboratoryTest" asp-action="Index" class="btn btn-warning">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

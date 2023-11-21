@@ -1,0 +1,34 @@
+﻿@model PatientManager.Core.Application.ViewModels.LaboratoryTest.SaveLaboratoryTestViewModel;
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+    ViewData["Title"] = "Save";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-opacity-50 bg-success text-black">
+                    <h4>@(editMode ? $"Editando la prueba: {Model.Name}" : "Creando nueva prueba")</h4>
+                </div>
+                <div class="card-body">
+
+                    <form method="post" asp-controller="LaboratoryTest" asp-action="@(editMode ? "Edit" : "Create")">
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Nombre de la prueba</label>
+                            <input asp-for="Name" class="form-control" placeholder="Placa abddominal..." />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="Created" />
+                        <input type="hidden" asp-for="CreatedBy" />
+
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                        <a class="btn btn-warning" asp-controller="LaboratoryTest" asp-action="Index">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+﻿@using PatientManager.Core.Application.ViewModels.Users;
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<style>
+    input {
+        border: 1px solid grey;
+    }
+
+    .divider:after,
+    .divider:before {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #eee;
+    }
+</style>
+
+<div class="text-center">
+    <h1 class="mt-5 display-3 fw-bold ls-tight">
+        Sistema Gestor ITLA
+    </h1>
+
+</div>
+
+<section class="vh-100">
+    <div class="container py-5 h-75">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                     class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                @Html.ValidationSummary(false, "", new {@class="text-danger"})
+                <form method="post" asp-controller="UserActions" asp-action="Index">
+                    <div class="text-center p-5">
+                        <h3>Inicio de sección</h3>
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <input asp-for="UserName" class="form-control form-control-lg" />
+                        <label class="form-label" asp-for="UserName">Nombre de usuario</label>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <input asp-for="Password" class="form-control form-control-lg" />
+                        <label class="form-label" asp-for="Password">Contraseña</label>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Acceder</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

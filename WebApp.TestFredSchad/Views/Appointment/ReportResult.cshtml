@@ -1,0 +1,59 @@
+﻿@model PatientManager.Core.Application.ViewModels.LaboratoryTestResults.SaveLaboratoryTestResultComplements;
+@{
+    ViewData["Title"] = "Report result";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-opacity-50 bg-success text-black">
+                    <h4>Reportar resultados</h4>
+                </div>
+                <div class="card-body">
+
+                    <form method="post" asp-controller="Appointment" asp-action="ReportResult" class="d-flex gap-3">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Selecciona una opción
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @foreach (var item in Model.ListLaboratoryTest)
+                                {
+                                    <label class="dropdown-item">
+                                        <input type="checkbox" name="LaboratoryTestsId" value=@item.Id> @item.Name
+                                    </label>
+
+                                }
+                            </div>
+                        </div>
+
+                        <input type="hidden" asp-for="PatientId" />
+                        <input type="hidden" asp-for="AppointmentId" />
+
+                        <button class="btn btn-primary " type="submit">Realizar pruebas</button>
+                        <a class="btn btn-warning" asp-controller="Appointment" asp-action="Index">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Este código maneja el despliegue del menú
+        $(".dropdown-toggle").click(function () {
+            $(".dropdown-menu").toggle();
+        });
+
+        // Esto previene que se cierre cuando haces clic en el menú
+        $(".dropdown-menu").click(function (e) {
+            e.stopPropagation();
+        });
+    });
+</script>

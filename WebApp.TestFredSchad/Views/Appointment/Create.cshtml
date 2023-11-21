@@ -1,0 +1,60 @@
+﻿@model PatientManager.Core.Application.ViewModels.Appointments.SaveAppointmentViewModel;
+@using WebApp.PatientManager.Constants; 
+@{
+    ViewData["Title"] = "Save";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-opacity-50 bg-success text-black">
+                    <h4>Creando nueva cita</h4>
+                </div>
+                <div class="card-body">
+
+                    <form method="post" asp-controller="Appointment" asp-action="Create">
+                        <div class="mb-3">
+                            <label asp-for="PatientId" class="form-label">Paciente</label>
+                            <select asp-for="PatientId" class="form-select" asp-items="@(new SelectList(Model.Patients, "Id", "Name"))">
+                                <option value="0">Seleccione uno...</option>
+                            </select>
+                            <span asp-validation-for="PatientId" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="MedicId" class="form-label">Médico</label>
+                            <select asp-for="MedicId " class="form-select" asp-items="@(new SelectList(Model.Medics, "Id", "Name"))">
+                                <option value="0">Seleccione uno...</option>
+                            </select>
+                            <span asp-validation-for="MedicId" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="AppointmentDate" class="form-label">Fecha de la cita</label>
+                            <input asp-for="AppointmentDate" class="form-control" />
+                            <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="AppointmentTime" class="form-label">Hora de la cita</label>
+                            <input asp-for="AppointmentTime" class="form-control" />
+                            <span asp-validation-for="AppointmentTime" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Reason" class="form-label">Causa</label>
+                            <input asp-for="Reason" class="form-control" />
+                            <span asp-validation-for="Reason" class="text-danger"></span>
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="State" value="@AppointmentState.PendingConsul"/>
+                        <input type="hidden" asp-for="Created" />
+                        <input type="hidden" asp-for="CreatedBy" />
+
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                        <a class="btn btn-warning" asp-controller="Appointment" asp-action="Index">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

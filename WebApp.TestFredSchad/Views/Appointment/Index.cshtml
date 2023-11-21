@@ -1,0 +1,104 @@
+﻿@model List<PatientManager.Core.Application.ViewModels.Appointments.AppointmentViewModel>;
+@using WebApp.PatientManager.Constants;
+@{
+    ViewData["Title"] = "Appointment";
+
+}
+
+<h1>Mantenimiento Citas</h1>
+
+<div class="container-fluid">
+
+    <div class="row mb-4">
+        <div class="col-3 offset-9">
+            <a asp-controller="Appointment" asp-action="Create" class="btn btn-success">Nueva Cita</a>
+        </div>
+    </div>
+
+    <div class="row">
+
+        @if (Model == null || Model.Count == 0)
+        {
+            <h2>
+                No hay nada para mostrar
+            </h2>
+        }
+        else
+        {
+    <table class="table align-middle mb-0 bg-white ">
+        <thead class="bg-light">
+            <tr>
+                <th class="fw-bold">Nombre paciente</th>
+                <th class="fw-bold">Nombre médico</th>
+                <th class="fw-bold">F. cita</th>
+                <th class="fw-bold">H. cita</th>
+                <th class="fw-bold">Causa</th>
+                <th class="fw-bold text-center">Estado</th>
+                <th class="text-center fw-bold">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var textDecoration = item.State == AppointmentState.PendingConsul ? "badge-warning" : 
+                                     item.State == AppointmentState.PendingResult ? "badge-info" : "badge-success";
+                var textTranslation = item.State == AppointmentState.PendingConsul ? "pendiente de consulta" : 
+                                      item.State == AppointmentState.PendingResult ? "pendiente de resultados" : "completada";
+
+                var complementIds = new List<int> { item.Id, item.Patient.Id };
+                var idsString = string.Join(",", complementIds);
+
+                <tr>
+                    <td>
+                        <p class="fw-normal mb-1">@($"{item.Patient.Name} {item.Patient.LastName}")</p>
+                    <td>
+                        <p class="fw-normal mb-1">@($"{item.Medic.Name} {item.Medic.LastName}")</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">@item.AppointmentDate</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">@item.AppointmentTime</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">@item.Reason</p>
+                    </td>
+                    <td class="text-center">
+                        <p class="badge @(textDecoration) fw-normal mb-1">@textTranslation</p>
+                    </td>
+                    <td class="text-center">
+                        @if (item.State == AppointmentState.PendingConsul)
+                        {
+
+                        <a asp-controller="Appointment" asp-action="ReportResult" asp-route-ids="@idsString" class="btn btn-primary btn-sm btn-rounded">
+                            consultar
+                        </a>
+                        }
+                        else if (item.State == AppointmentState.PendingResult)
+                        {
+                        <a asp-controller="Appointment" asp-action="ConsultationResults" asp-route-id="@item.Id" class="btn btn-secondary btn-sm btn-rounded">
+                            consultar resultados
+                        </a>
+                        }
+                        else
+                        {
+                        <a asp-controller="Appointment" asp-action="ViewResults" asp-route-id="@item.Id" class="btn btn-success btn-sm btn-rounded">
+                            ver resultados
+                        </a>
+                        }
+
+                        <a asp-controller="Appointment" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm btn-rounded">
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+        }
+
+
+    </div>
+
+</div>
