@@ -1,8 +1,17 @@
-#Script pata la DB luego de correr el migration:
+## 🚀 Usuarios disponibles para probar
 
-insert into Users (Users.Name, LastName, Email, UserName, Users.Password, Users.Role, Created, CreatedBy) values ('John', 'Doe', 'DSFSDF@DFSGFDS.com', 'JohnDoe', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'Administrator', GETDATE(), 'Pedro');
+Tenemos dos tipos de usuarios disponibles para probar el sistema: un administrador y un asistente.
 
-insert into Users (Users.Name, LastName, Email, UserName, Users.Password, Users.Role, Created, CreatedBy) values ('martina', 'Doe', 'DSFSDF@DFSGFDS.com', 'Martina', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'Assistant', GETDATE(), 'Pedro');
+### 🔐 Administrador
 
--La contraseña de ambos es 12345
--Lo realice asi ya que los usuarios son manejados por un admin y no existe un registro externo, solo se puede tener usuarios si alguien desde dentro de la app lo hace, o desde la misma DB
+El administrador esta encargado a los usuarios, medicos y pruebas de laboratorio. Aquí están los detalles de inicio de sesión:
+
+- **Nombre de usuario:** JohnDoe
+- **Contraseña:** 12345
+
+### 📋 Asistente
+
+El asistente esta encargado de los pacientes, citas y resultados de pruebas de laboratorio. Aquí están los detalles de inicio de sesión:
+
+- **Nombre de usuario:** Martina
+- **Contraseña:** 12345
