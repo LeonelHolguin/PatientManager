@@ -23,10 +23,9 @@ namespace PatientManager.Infrastructure.Persistence
             {
 
                 services.AddDbContext<ApplicationContext>(options =>
-                                     options.UseSqlServer(connectionString,
+                                     options.UseSqlite(connectionString,
                                          m => {
                                              m.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName);
-                                             m.UseDateOnlyTimeOnly();
                                          }));
             }
             #endregion
