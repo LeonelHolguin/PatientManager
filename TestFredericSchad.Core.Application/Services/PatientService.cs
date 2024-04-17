@@ -40,6 +40,8 @@ namespace PatientManager.Core.Application.Services
             viewModel.BirthDate = patient.BirthDate;
             viewModel.HasAllergy = patient.HasAllergy;
             viewModel.IsSmoker = patient.IsSmoker;
+            viewModel.Created = patient.Created;
+            viewModel.CreatedBy = patient.CreatedBy;
             viewModel.IdentityCard = patient.IdentityCard;
             viewModel.Photo = patient.Photo;
 
@@ -55,13 +57,13 @@ namespace PatientManager.Core.Application.Services
             patient.LastName = patientToSave.LastName;
             patient.Phone = patientToSave.Phone;
             patient.Address = patientToSave.Address;
-            patient.BirthDate = (DateOnly)patientToSave.BirthDate;
+            patient.BirthDate = (DateOnly)patientToSave.BirthDate!;
             patient.HasAllergy = patientToSave.HasAllergy;
             patient.IsSmoker = patientToSave.IsSmoker;
             patient.IdentityCard = patientToSave.IdentityCard;
             patient.Photo = patientToSave.Photo;
-            patient.Created = (DateTime)patientToSave.Created;
-            patient.CreatedBy = patientToSave.CreatedBy;
+            patient.Created = (DateTime)patientToSave.Created!;
+            patient.CreatedBy = patientToSave.CreatedBy!;
 
             await _patientRepository.UpdateAsync(patient);
         }
